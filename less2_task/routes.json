@@ -1,0 +1,176 @@
+[
+  {
+    "Id": 0,
+    "RouteName": "/openapi/v1.json",
+    "Method": "GET",
+    "Count": 29
+  },
+  {
+    "Id": 0,
+    "RouteName": "/api/messages",
+    "Method": "GET",
+    "Count": 14
+  },
+  {
+    "Id": 0,
+    "RouteName": "/api/users/register",
+    "Method": "POST",
+    "Count": 5
+  },
+  {
+    "Id": 0,
+    "RouteName": "/api/users/login",
+    "Method": "POST",
+    "Count": 5
+  },
+  {
+    "Id": 0,
+    "RouteName": "/api/messages/7",
+    "Method": "DELETE",
+    "Count": 2
+  },
+  {
+    "Id": 0,
+    "RouteName": "/api/messages/6",
+    "Method": "DELETE",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/api/messages/5",
+    "Method": "DELETE",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/_framework/aspnetcore-browser-refresh.js",
+    "Method": "GET",
+    "Count": 3
+  },
+  {
+    "Id": 0,
+    "RouteName": "/api/orders",
+    "Method": "GET",
+    "Count": 2
+  },
+  {
+    "Id": 0,
+    "RouteName": "/api/orders",
+    "Method": "POST",
+    "Count": 7
+  },
+  {
+    "Id": 0,
+    "RouteName": "/api/orders/1/quantity",
+    "Method": "PATCH",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/api/orders/2/status",
+    "Method": "PATCH",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/api/users/all",
+    "Method": "GET",
+    "Count": 4
+  },
+  {
+    "Id": 0,
+    "RouteName": "/api/messages",
+    "Method": "POST",
+    "Count": 7
+  },
+  {
+    "Id": 0,
+    "RouteName": "//index.html",
+    "Method": "GET",
+    "Count": 3
+  },
+  {
+    "Id": 0,
+    "RouteName": "//js/script.js",
+    "Method": "GET",
+    "Count": 3
+  },
+  {
+    "Id": 0,
+    "RouteName": "/api/categories",
+    "Method": "GET",
+    "Count": 42
+  },
+  {
+    "Id": 0,
+    "RouteName": "/favicon.ico",
+    "Method": "GET",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/api/categories",
+    "Method": "POST",
+    "Count": 14
+  },
+  {
+    "Id": 0,
+    "RouteName": "/api/categories/2/name",
+    "Method": "PATCH",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/api/categories/3",
+    "Method": "DELETE",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/api/categories/4/name",
+    "Method": "PATCH",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/api/categories/4",
+    "Method": "DELETE",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/api/categories/5/name",
+    "Method": "PATCH",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/api/categories/5",
+    "Method": "DELETE",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/api/categories/8",
+    "Method": "DELETE",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/api/categories/11",
+    "Method": "DELETE",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/api/categories/10",
+    "Method": "DELETE",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/.well-known/appspecific/com.chrome.devtools.json",
+    "Method": "GET",
+    "Count": 1
+  }
+]

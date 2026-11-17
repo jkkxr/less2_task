@@ -1,0 +1,35 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+@server=https://localhost
+@port=7277
+
+GET {{server}}:{{port}}/api/orders
+Accept: application/json
+
+###
+POST {{server}}:{{port}}/api/orders
+Content-Type: application/json
+Accept: application/json
+
+{
+  "quantity": "10",
+  "price": "50.50",
+  "comment": "test order"
+}
+
+###
+PATCH {{server}}:{{port}}/api/orders/1/quantity
+Content-Type: application/json
+Accept: application/json
+
+{
+  "quantity": "5"
+}
+
+###
+PATCH {{server}}:{{port}}/api/orders/1/status
+Content-Type: application/json
+Accept: application/json
+
+{
+  "isCompleted": true
+}

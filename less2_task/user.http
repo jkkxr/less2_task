@@ -1,0 +1,23 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+@server=https://localhost
+@port=7277
+@toke_user1=IJyyeQKLBUSeu3ARlkgwmA==
+
+POST {{server}}:{{port}}/api/users/register
+Content-Type: application/json
+
+{
+  "name": "Test User 2",
+  "email": "test2@test.com",
+  "password": "123456"
+}
+
+###
+
+POST {{server}}:{{port}}/api/users/login
+Content-Type: application/json
+
+{
+  "email": "test1@test.com",
+  "password": "123456"
+}

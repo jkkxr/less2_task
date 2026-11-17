@@ -1,0 +1,81 @@
+using less2_task.Models;
+using Microsoft.AspNetCore.Mvc;
+using less2_task.Services;
+using less2_task.Middlewares;
+using Microsoft.EntityFrameworkCore;
+
+var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<ApiDbContext>(options =>
+    options.UseSqlite(connectionString)
+);
+
+builder.Services.AddAutoMapper(c =>
+{
+
+}, typeof(Program));
+
+builder.Services.AddControllers();
+
+builder.Services.AddSingleton<IDataProvider<Message>>(c =>
+{
+    var dataFile = builder
+    .Configuration
+    .GetRequiredSection("MessageService")
+    .GetValue<string>("DataFilePath");
+
+    return new MessageProvider(dataFile);
+});
+
+builder.Services.AddScoped<MessageService>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped<RequestLoggerService>();
+builder.Services.AddSingleton<IDataProvider<RouteStat>>(c => new JsonFileDataProvider<RouteStat>("routes.json"));
+
+builder.Services.AddSingleton<IDataProvider<User>>(c =>
+{
+    var dataFile = builder
+    .Configuration
+    .GetRequiredSection("UserService")
+    .GetValue<string>("DataFilePath");
+    return new JsonFileDataProvider<User>(dataFile);
+});
+builder.Services.AddScoped<UserService>();
+
+builder.Services.AddSingleton<IDataProvider<Order>>(c =>
+{
+    var dataFile = builder
+    .Configuration
+    .GetRequiredSection("OrderService")
+    .GetValue<string>("DataFilePath");
+    return new JsonFileDataProvider<Order>(dataFile);
+});
+builder.Services.AddScoped<OrderService>();
+
+builder.Services.AddScoped<CategoryService>();
+
+builder.Services.AddOpenApi();
+
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/openapi/v1.json", "My API V1");
+        c.RoutePrefix = "swagger";
+    });
+}
+
+app.UseMiddleware<LoggerMiddleware>();
+app.UseMiddleware<CheckUserMiddleware>();
+app.UseMiddleware<CounterMiddleware>();
+
+app.MapControllers();
+
+app.UseStaticFiles();
+
+app.Run();

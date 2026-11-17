@@ -1,0 +1,35 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+
+@server=https://localhost
+@port=7277
+@token_user1=IJyyeQKLBUSeu3ARlkgwmA==
+@token_user2=PdVdW4f5pk6HatjNKIM/ZA==
+
+GET {{server}}:{{port}}/api/messages
+Accept: application/json
+Authorization: Baerer {{token_user2}}
+
+###
+GET {{server}}:{{port}}/api/messages/2
+Accept: application/json
+
+###
+GET {{server}}:{{port}}/api/messages/sender/bb@gmail.com
+Accept: application/json
+
+###
+POST {{server}}:{{port}}/api/messages
+Content-Type: application/json
+Accept: application/json
+Authorization: Baerer {{token_user2}}
+
+{
+  "sender": "aa@gmail.com",
+  "text": "hello from aa",
+  "sentat": "2026-06-09"
+}
+
+###
+DELETE {{server}}:{{port}}/api/messages/5
+Accept: application/json
+Authorization: Baerer {{toke_user2}}
