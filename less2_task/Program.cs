@@ -12,6 +12,11 @@ builder.Services.AddDbContext<ApiDbContext>(options =>
     options.UseSqlite(connectionString)
 );
 
+//SQL Server
+//builder.Services.AddDbContext<ApiDbContext>(options =>
+//    options.UseSqlServer(connectionString)
+//);
+
 builder.Services.AddAutoMapper(c =>
 {
 

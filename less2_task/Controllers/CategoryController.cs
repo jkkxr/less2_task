@@ -13,7 +13,7 @@ namespace less2_task.Controllers;
 public class CategoryController(CategoryService categoryService) : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> GetPagedCategories([FromQuery] PageRequest pageRequest)
+    public async Task<IActionResult> GetPagedCategories([FromQuery] PageRequest<CategoryFilter> pageRequest)
     {
         var result = await categoryService.GetPagedCategoriesAsync(pageRequest);
         return Ok(result);

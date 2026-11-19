@@ -3,7 +3,7 @@
     "Id": 0,
     "RouteName": "/openapi/v1.json",
     "Method": "GET",
-    "Count": 29
+    "Count": 30
   },
   {
     "Id": 0,
@@ -87,31 +87,31 @@
     "Id": 0,
     "RouteName": "//index.html",
     "Method": "GET",
-    "Count": 3
+    "Count": 16
   },
   {
     "Id": 0,
     "RouteName": "//js/script.js",
     "Method": "GET",
-    "Count": 3
+    "Count": 14
   },
   {
     "Id": 0,
     "RouteName": "/api/categories",
     "Method": "GET",
-    "Count": 42
+    "Count": 102
   },
   {
     "Id": 0,
     "RouteName": "/favicon.ico",
     "Method": "GET",
-    "Count": 1
+    "Count": 3
   },
   {
     "Id": 0,
     "RouteName": "/api/categories",
     "Method": "POST",
-    "Count": 14
+    "Count": 22
   },
   {
     "Id": 0,
@@ -170,6 +170,102 @@
   {
     "Id": 0,
     "RouteName": "/.well-known/appspecific/com.chrome.devtools.json",
+    "Method": "GET",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/upload",
+    "Method": "POST",
+    "Count": 17
+  },
+  {
+    "Id": 0,
+    "RouteName": "/uploads/c509b809-b845-4f59-9048-d0e17c78f971.jpg",
+    "Method": "GET",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/uploads/44bb37ed-fdd4-4e02-8942-75dccd57dbf3.png",
+    "Method": "GET",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/uploads/b88fef4e-ca44-4e0b-b9bf-0bac87d2a986.jpg",
+    "Method": "GET",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/uploads/a9a0b2c3-7fd8-4ced-98c3-7af7b658b2c6.jpg",
+    "Method": "GET",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/uploads/0dac93ef-74f1-42bb-ba1d-9b0af86e9a95.jpg",
+    "Method": "GET",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/uploads/4c882d0c-5885-485f-96f4-a78bf286fb5d.jpg",
+    "Method": "GET",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/uploads/06e34fe2-cc38-4921-a273-f1125189c259.jpg",
+    "Method": "GET",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/uploads/564916bb-3c30-4720-8953-1a4842977766.jpg",
+    "Method": "GET",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/uploads/e87116bb-ffa7-4a60-8254-5371b950a865.jpg",
+    "Method": "GET",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/uploads/470ed8af-ceba-490a-a274-d77a5dfc64d2.jpg",
+    "Method": "GET",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/uploads/a1d770d6-c20b-4d88-9246-59ee9c318bd3.jpg",
+    "Method": "GET",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/uploads/bc883b6e-5c0e-469e-a797-ab73582d046f.jpg",
+    "Method": "GET",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/uploads/f695a0cd-88c1-4cee-a5b2-addedfb4bd8d.jpg",
+    "Method": "GET",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/uploads/cec7f0f3-9a91-4d1a-8798-56df362f7f3e.jpg",
+    "Method": "GET",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/uploads/9973eeb5-d36b-44bc-ae50-272d04b0fdf9.jpg",
     "Method": "GET",
     "Count": 1
   }

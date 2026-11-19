@@ -13,8 +13,35 @@ function getHeaders() {
     return headers;
 }
 
+function toggleFiltersPanel() {
+    const panel = document.getElementById('filtersPanel');
+    panel.classList.toggle('active');
+}
+
 async function loadCategories(page = 1) {
-    const response = await fetch(`${apiUrl}?page=${page}&pageSize=${pageSize}`, {
+    currentPage = page;
+
+    const nameFilter = document.getElementById('filterName').value.trim();
+    const sortBy = document.getElementById('sortBy').value;
+    const createdFrom = document.getElementById('filterCreatedFrom').value;
+    const createdTo = document.getElementById('filterCreatedTo').value;
+
+    let url = `${apiUrl}?page=${currentPage}&pageSize=${pageSize}`;
+
+    if (sortBy) {
+        url += `&orderBy=${encodeURIComponent(sortBy)}`;
+    }
+    if (nameFilter) {
+        url += `&filter.name=${encodeURIComponent(nameFilter)}`;
+    }
+    if (createdFrom) {
+        url += `&filter.createdFrom=${encodeURIComponent(createdFrom)}`;
+    }
+    if (createdTo) {
+        url += `&filter.createdTo=${encodeURIComponent(createdTo)}`;
+    }
+
+    const response = await fetch(url, {
         headers: getHeaders()
     });
 
@@ -23,7 +50,7 @@ async function loadCategories(page = 1) {
         return;
     }
 
-    const data = await response.json(); 
+    const data = await response.json();
     const categories = data.items || [];
     currentPage = data.currentPage || page;
     totalPages = data.totalPages || 1;
@@ -31,22 +58,38 @@ async function loadCategories(page = 1) {
     const tbody = document.getElementById('categoriesTable');
     tbody.innerHTML = '';
 
-    categories.forEach(cat => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td>${cat.id}</td>
-            <td>${cat.name}</td>
-            <td>${new Date(cat.createdAt).toLocaleString()}</td>
-            <td>${new Date(cat.updatedAt).toLocaleString()}</td>
-            <td>
-                <button class="btn-edit" onclick="editCategory(${cat.id}, '${cat.name}')">Редагувати</button>
-                <button class="btn-delete" onclick="deleteCategory(${cat.id})">Видалити</button>
-            </td>
-        `;
-        tbody.appendChild(tr);
-    });
+    if (categories.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #777;">Нічого не знайдено</td></tr>`;
+    } else {
+        categories.forEach(cat => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${cat.id}</td>
+                <td>${cat.name}</td>
+                <td>${new Date(cat.createdAt).toLocaleString()}</td>
+                <td>${new Date(cat.updatedAt).toLocaleString()}</td>
+                <td>
+                    <button class="btn-edit" onclick="editCategory(${cat.id}, '${cat.name}')">Редагувати</button>
+                    <button class="btn-delete" onclick="deleteCategory(${cat.id})">Видалити</button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
 
     updatePaginationUI();
+}
+
+function applyFilters() {
+    loadCategories(1); 
+}
+
+function resetFilters() {
+    document.getElementById('filterName').value = '';
+    document.getElementById('sortBy').value = '-CreatedAt';
+    document.getElementById('filterCreatedFrom').value = '';
+    document.getElementById('filterCreatedTo').value = '';
+    loadCategories(1);
 }
 
 function updatePaginationUI() {
@@ -122,5 +165,19 @@ async function deleteCategory(id) {
         alert('Помилка при видаленні: ' + response.status);
     }
 }
+
+const form = document.querySelector('form');
+
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const response = await fetch('/upload', {
+        method: 'POST',
+        body: new FormData(form)
+    });
+
+    const data = await response.json();
+    document.body.style.backgroundImage = `url('/uploads/${data.fileName}')`;
+});
 
 loadCategories(1);
