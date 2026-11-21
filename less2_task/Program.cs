@@ -37,6 +37,8 @@ builder.Services.AddSingleton<IDataProvider<Message>>(c =>
 builder.Services.AddScoped<MessageService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<RequestLoggerService>();
+builder.Services.AddScoped<UploadImageService>();
+builder.Services.AddScoped<SiteConfigService>();
 builder.Services.AddSingleton<IDataProvider<RouteStat>>(c => new JsonFileDataProvider<RouteStat>("routes.json"));
 
 builder.Services.AddSingleton<IDataProvider<User>>(c =>

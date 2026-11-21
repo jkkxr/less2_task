@@ -1,39 +1,47 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using less2_task.Services;
+using Microsoft.AspNetCore.Mvc;
+using less2_task.Models.DTO;
 
 namespace less2_task.Controllers;
 
 [Route("upload")]
 [ApiController]
-public class UploadController(IWebHostEnvironment env): ControllerBase
+public class UploadController(
+    UploadImageService uploadImageService,
+    SiteConfigService siteConfigService
+    ) : ControllerBase
 {
-    private static string? currFileName = null;
-
-    [HttpPost]
-    public async Task<IActionResult> UploadFile([FromForm] IFormFile file)
+    [HttpPost("background")]
+    public async Task<IActionResult> UploadBackgroundImage([FromForm] IFormFile file)
     {
-        var uploadsFolder = Path.Combine(env.WebRootPath, "uploads");
-        if (!string.IsNullOrEmpty(currFileName))
+        try
         {
-            var oldFilePath = Path.Combine(uploadsFolder, currFileName);
-            if(System.IO.File.Exists(oldFilePath))
+            var image = await uploadImageService.UploadAsync(file);
+            await siteConfigService.ChangeBackgroundImageAsync(image);
+
+            return Ok(new OperationResult
             {
-                System.IO.File.Delete(oldFilePath);
-            }
+                Success = true,
+                ErrorMessage = null
+            });
         }
+        catch (Exception ex)
+        {
 
-        var originalFileName = Path.GetFileName(file.FileName);
+            return BadRequest(new OperationResult
+            {
+                Success = false,
+                ErrorMessage = ex.Message
+            });
+        }
+    }
 
-        var fileExtension = Path.GetExtension(originalFileName);
-
-        var uniqueFileName = $"{Guid.NewGuid()}{fileExtension}";
-
-        var filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-        using var fileStream = new FileStream(filePath, FileMode.Create);
-        await file.CopyToAsync(fileStream);
-
-        currFileName = uniqueFileName;
-
-        return Ok(new { FileName = uniqueFileName });
+    [HttpGet("background")]
+    public async Task<IActionResult> GetBackgroundImage()
+    {
+        return Ok(new
+        {
+            ImageUrl = await siteConfigService.GetBackgroundImageUrlAsync()
+        });
     }
 }

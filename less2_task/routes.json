@@ -87,25 +87,25 @@
     "Id": 0,
     "RouteName": "//index.html",
     "Method": "GET",
-    "Count": 16
+    "Count": 18
   },
   {
     "Id": 0,
     "RouteName": "//js/script.js",
     "Method": "GET",
-    "Count": 14
+    "Count": 19
   },
   {
     "Id": 0,
     "RouteName": "/api/categories",
     "Method": "GET",
-    "Count": 102
+    "Count": 105
   },
   {
     "Id": 0,
     "RouteName": "/favicon.ico",
     "Method": "GET",
-    "Count": 3
+    "Count": 4
   },
   {
     "Id": 0,
@@ -268,5 +268,29 @@
     "RouteName": "/uploads/9973eeb5-d36b-44bc-ae50-272d04b0fdf9.jpg",
     "Method": "GET",
     "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/upload/background",
+    "Method": "GET",
+    "Count": 5
+  },
+  {
+    "Id": 0,
+    "RouteName": "/upload/background",
+    "Method": "POST",
+    "Count": 2
+  },
+  {
+    "Id": 0,
+    "RouteName": "/uploads/a4bc2186-9acb-4516-9213-766acce91fc8.jpg",
+    "Method": "GET",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/uploads/4fe3068b-cb4e-470e-a7fe-f865e05d47f6.jpg",
+    "Method": "GET",
+    "Count": 2
   }
 ]

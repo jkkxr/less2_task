@@ -166,18 +166,35 @@ async function deleteCategory(id) {
     }
 }
 
-const form = document.querySelector('form');
-
-form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const response = await fetch('/upload', {
-        method: 'POST',
-        body: new FormData(form)
-    });
+async function applyBackground() {
+    const response = await fetch('/upload/background');
+    if (!response.ok) return;
 
     const data = await response.json();
-    document.body.style.backgroundImage = `url('/uploads/${data.fileName}')`;
-});
+    const url = data.imageUrl || data.ImageUrl;
+    if (url) {
+        document.body.style.backgroundImage = `url('${url}')`;
+    }
+}
+
+const uploadForm = document.getElementById('uploadForm');
+if (uploadForm) {
+    uploadForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const response = await fetch('/upload/background', {
+            method: 'POST',
+            body: new FormData(uploadForm)
+        });
+
+        if (response.ok) {
+            await applyBackground();
+        } else {
+            alert('Помилка завантаження фону: ' + response.status);
+        }
+    });
+}
+
+applyBackground();
 
 loadCategories(1);

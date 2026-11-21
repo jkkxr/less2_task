@@ -38,6 +38,28 @@ namespace less2_task.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("less2_task.Models.ImageFile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Filename")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OriginalFilename")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Images");
+                });
+
             modelBuilder.Entity("less2_task.Models.Message", b =>
                 {
                     b.Property<int>("Id")
@@ -90,6 +112,22 @@ namespace less2_task.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("less2_task.Models.SiteConfig", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("BackgroundImageId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BackgroundImageId");
+
+                    b.ToTable("SiteConfig");
+                });
+
             modelBuilder.Entity("less2_task.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -115,6 +153,15 @@ namespace less2_task.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("less2_task.Models.SiteConfig", b =>
+                {
+                    b.HasOne("less2_task.Models.ImageFile", "BackgroundImage")
+                        .WithMany()
+                        .HasForeignKey("BackgroundImageId");
+
+                    b.Navigation("BackgroundImage");
                 });
 #pragma warning restore 612, 618
         }

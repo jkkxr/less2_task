@@ -2,6 +2,7 @@
 {
     public class RequestLoggerService
     {
+        private static readonly SemaphoreSlim _fileLock = new(1, 1);
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public RequestLoggerService(IHttpContextAccessor httpContextAccessor)
@@ -19,7 +20,16 @@
 
             var logMessage = $"{DateTime.UtcNow}: {httpContext.Request.Method} {httpContext.Request.Path} IP:{httpContext.Connection.RemoteIpAddress}";
             Console.WriteLine(logMessage);
-            await File.AppendAllTextAsync("requests.log", logMessage + Environment.NewLine);
+
+            await _fileLock.WaitAsync();
+            try
+            {
+                await File.AppendAllTextAsync("requests.log", logMessage + Environment.NewLine);
+            }
+            finally
+            {
+                _fileLock.Release();
+            }
         }
     }
 }
