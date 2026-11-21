@@ -87,19 +87,19 @@
     "Id": 0,
     "RouteName": "//index.html",
     "Method": "GET",
-    "Count": 18
+    "Count": 20
   },
   {
     "Id": 0,
     "RouteName": "//js/script.js",
     "Method": "GET",
-    "Count": 19
+    "Count": 23
   },
   {
     "Id": 0,
     "RouteName": "/api/categories",
     "Method": "GET",
-    "Count": 105
+    "Count": 113
   },
   {
     "Id": 0,
@@ -111,7 +111,7 @@
     "Id": 0,
     "RouteName": "/api/categories",
     "Method": "POST",
-    "Count": 22
+    "Count": 23
   },
   {
     "Id": 0,
@@ -273,13 +273,13 @@
     "Id": 0,
     "RouteName": "/upload/background",
     "Method": "GET",
-    "Count": 5
+    "Count": 9
   },
   {
     "Id": 0,
     "RouteName": "/upload/background",
     "Method": "POST",
-    "Count": 2
+    "Count": 3
   },
   {
     "Id": 0,
@@ -291,6 +291,36 @@
     "Id": 0,
     "RouteName": "/uploads/4fe3068b-cb4e-470e-a7fe-f865e05d47f6.jpg",
     "Method": "GET",
+    "Count": 5
+  },
+  {
+    "Id": 0,
+    "RouteName": "/api/categories/23/image",
+    "Method": "POST",
     "Count": 2
+  },
+  {
+    "Id": 0,
+    "RouteName": "/uploads/e2e1fb08-2e6e-447c-8da9-95ed474afea0.jpg",
+    "Method": "GET",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/uploads/69953100-390b-477d-94b5-ed98aeac3ee1.jpg",
+    "Method": "GET",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/api/categories/23",
+    "Method": "DELETE",
+    "Count": 1
+  },
+  {
+    "Id": 0,
+    "RouteName": "/uploads/01982197-32be-47b9-8649-18c671774d60.jpg",
+    "Method": "GET",
+    "Count": 3
   }
 ]

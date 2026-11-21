@@ -26,6 +26,9 @@ namespace less2_task.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("ImageId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -34,6 +37,8 @@ namespace less2_task.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ImageId");
 
                     b.ToTable("Categories");
                 });
@@ -153,6 +158,15 @@ namespace less2_task.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("less2_task.Models.Category", b =>
+                {
+                    b.HasOne("less2_task.Models.ImageFile", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId");
+
+                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("less2_task.Models.SiteConfig", b =>

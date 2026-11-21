@@ -59,17 +59,26 @@ async function loadCategories(page = 1) {
     tbody.innerHTML = '';
 
     if (categories.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #777;">Нічого не знайдено</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #777;">Нічого не знайдено</td></tr>`;
     } else {
         categories.forEach(cat => {
+            const imgSrc = getCategoryImageSrc(cat);
+            const imageCellHtml = imgSrc
+                ? `<img src="${imgSrc}" alt="${cat.name}" class="category-thumb">`
+                : `<span class="category-no-image">Немає</span>`;
+            const imageBtnText = imgSrc ? 'Змінити зображення' : 'Встановити зображення';
+
+            const safeName = String(cat.name).replace(/'/g, "\\'");
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td>${cat.id}</td>
+                <td>${imageCellHtml}</td>
                 <td>${cat.name}</td>
                 <td>${new Date(cat.createdAt).toLocaleString()}</td>
                 <td>${new Date(cat.updatedAt).toLocaleString()}</td>
                 <td>
-                    <button class="btn-edit" onclick="editCategory(${cat.id}, '${cat.name}')">Редагувати</button>
+                    <button class="btn-image" onclick="triggerCategoryImageUpload(${cat.id})">${imageBtnText}</button>
+                    <button class="btn-edit" onclick="editCategory(${cat.id}, '${safeName}')">Редагувати</button>
                     <button class="btn-delete" onclick="deleteCategory(${cat.id})">Видалити</button>
                 </td>
             `;
@@ -191,6 +200,58 @@ if (uploadForm) {
             await applyBackground();
         } else {
             alert('Помилка завантаження фону: ' + response.status);
+        }
+    });
+}
+
+let selectedCategoryId = null;
+
+function getCategoryImageSrc(cat) {
+    const img = cat.image || cat.Image;
+    if (!img) return null;
+
+    const filename = img.filename || img.Filename;
+    if (filename) {
+        return `/uploads/${filename}`;
+    }
+
+    return img.url || img.Url || img.imageUrl || img.ImageUrl || null;
+}
+
+function triggerCategoryImageUpload(categoryId) {
+    selectedCategoryId = categoryId;
+    const fileInput = document.getElementById('categoryImageInput');
+    if (!fileInput) return;
+
+    fileInput.value = '';
+    fileInput.click();
+}
+
+const categoryImageInput = document.getElementById('categoryImageInput');
+if (categoryImageInput) {
+    categoryImageInput.addEventListener('change', async () => {
+        const file = categoryImageInput.files[0];
+        if (!file || !selectedCategoryId) return;
+
+        const formData = new FormData();
+        formData.append('file', file);
+
+        const headers = {};
+        if (authToken) {
+            headers['Authorization'] = `Bearer ${authToken}`;
+        }
+
+        const response = await fetch(`${apiUrl}/${selectedCategoryId}/image`, {
+            method: 'POST',
+            headers: headers,
+            body: formData
+        });
+
+        if (response.ok) {
+            selectedCategoryId = null;
+            await loadCategories(currentPage);
+        } else {
+            alert('Помилка завантаження зображення категорії: ' + response.status);
         }
     });
 }

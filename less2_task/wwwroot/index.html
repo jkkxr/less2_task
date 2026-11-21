@@ -272,6 +272,35 @@
                     background-color: #c0c0c0;
                     color: #121212;
                 }
+
+        .category-thumb {
+            width: 56px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid #444;
+            display: block;
+        }
+
+        .category-no-image {
+            display: inline-block;
+            font-size: 12px;
+            color: #777;
+            font-style: italic;
+        }
+
+        .btn-image {
+            background-color: #222;
+            color: #c0c0c0;
+            border: 1px solid #555;
+            margin-right: 6px;
+        }
+
+            .btn-image:hover {
+                background-color: #c0c0c0;
+                color: #121212;
+                border-color: #c0c0c0;
+            }
     </style>
 </head>
 <body>
@@ -328,6 +357,7 @@
         <thead>
             <tr>
                 <th>ID</th>
+                <th>Зображення</th>
                 <th>Назва</th>
                 <th>Створено</th>
                 <th>Оновлено</th>
@@ -343,6 +373,8 @@
         <span id="pageInfo">Сторінка 1 з 1</span>
         <button class="btn-page" id="nextBtn" onclick="changePage(1)">Наступна →</button>
     </div>
+
+    <input type="file" id="categoryImageInput" accept=".jpg,.jpeg,.png,.gif" style="display: none;" />
 
     <script src="js/script.js"></script>
 </body>

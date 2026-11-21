@@ -4,7 +4,7 @@ using less2_task.Models.DTO;
 
 namespace less2_task.Services;
 
-public class CategoryService(ApiDbContext dbContext)
+public class CategoryService(ApiDbContext dbContext, UploadImageService uploadImageService)
 {
     public async Task<PageResult<Category>> GetPagedCategoriesAsync(PageRequest<CategoryFilter> pageRequest)
     {
@@ -51,7 +51,9 @@ public class CategoryService(ApiDbContext dbContext)
             .Take(pageRequest.PageSize);
         };
 
-        var query = dbContext.Categories.AsQueryable();
+        var query = dbContext.Categories
+            .Include(c => c.Image)
+            .AsQueryable();
 
         query = filter(query);
         query = orderBy(query);
@@ -76,7 +78,9 @@ public class CategoryService(ApiDbContext dbContext)
 
     public async Task<Category?> GetCategoryByIdAsync(int id)
     {
-        return await dbContext.Categories.FirstOrDefaultAsync(o => o.Id == id);
+        return await dbContext.Categories
+            .Include(c => c.Image)
+            .FirstOrDefaultAsync(o => o.Id == id);
     }
 
     public async Task<Category> AddCategoryAsync(Category newCategory)
@@ -91,7 +95,9 @@ public class CategoryService(ApiDbContext dbContext)
 
     public async Task<Category?> UpdateCategoryAsync(int id, string newName)
     {
-        var category = await dbContext.Categories.FirstOrDefaultAsync(o => o.Id == id);
+        var category = await dbContext.Categories
+            .Include(c => c.Image)
+            .FirstOrDefaultAsync(o => o.Id == id);
         if (category == null)
         {
             return null;
@@ -104,13 +110,25 @@ public class CategoryService(ApiDbContext dbContext)
 
     public async Task<bool> DeleteCategoryAsync(int id)
     {
-        var category = await dbContext.Categories.FirstOrDefaultAsync(p => p.Id == id);
+        var category = await dbContext.Categories
+            .Include(c => c.Image)
+            .FirstOrDefaultAsync(p => p.Id == id);
         if (category == null)
         {
             return false;
         }
+        if(category.Image != null)
+        {
+            await uploadImageService.DeleteAsync(category.Image);
+            category.Image = null;
+        }
         dbContext.Categories.Remove(category);
         await dbContext.SaveChangesAsync();
         return true;
+    }
+
+    public async Task UpdateAsync(Category category)
+    {
+        await dbContext.SaveChangesAsync();
     }
 }

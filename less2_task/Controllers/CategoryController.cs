@@ -10,7 +10,10 @@ namespace less2_task.Controllers;
 [Tags("Category Management")]
 [ApiController]
 [Route("api/categories")]
-public class CategoryController(CategoryService categoryService) : ControllerBase
+public class CategoryController(
+    CategoryService categoryService,
+    UploadImageService uploadImageService
+    ) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> GetPagedCategories([FromQuery] PageRequest<CategoryFilter> pageRequest)
@@ -47,5 +50,43 @@ public class CategoryController(CategoryService categoryService) : ControllerBas
             return NotFound();
         }
         return Ok();
+    }
+
+    [HttpPost("{id:int}/image")]
+    public async Task<IActionResult> UploadImage(int id, [FromForm] IFormFile file)
+    {
+        try
+        {
+            var category = await categoryService.GetCategoryByIdAsync(id);
+            if (category == null)
+            {
+                return NotFound(); 
+            }
+
+            var image = await uploadImageService.UploadAsync(file);
+
+            if (category.Image != null)
+            {
+                await uploadImageService.DeleteAsync(category.Image);
+            }
+            category.Image = image;
+
+            await categoryService.UpdateAsync(category);
+
+            return Ok(new OperationResult
+            {
+                Success = true,
+                ErrorMessage = null
+            });
+        }
+        catch (Exception ex)
+        {
+
+            return BadRequest(new OperationResult
+            {
+                Success = false,
+                ErrorMessage = ex.Message
+            });
+        }
     }
 }
