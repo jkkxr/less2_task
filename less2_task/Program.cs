@@ -1,7 +1,9 @@
-using less2_task.Models;
-using Microsoft.AspNetCore.Mvc;
-using less2_task.Services;
+using FluentValidation;
 using less2_task.Middlewares;
+using less2_task.Models;
+using less2_task.Models.Validation;
+using less2_task.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,7 +24,13 @@ builder.Services.AddAutoMapper(c =>
 
 }, typeof(Program));
 
-builder.Services.AddControllers();
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+
+builder.Services.AddControllers(o =>
+{
+    o.Filters.Add<FluentValidationActionFilter>();
+
+});
 
 builder.Services.AddSingleton<IDataProvider<Message>>(c =>
 {

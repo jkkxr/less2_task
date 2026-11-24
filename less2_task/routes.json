@@ -15,13 +15,13 @@
     "Id": 0,
     "RouteName": "/api/users/register",
     "Method": "POST",
-    "Count": 5
+    "Count": 9
   },
   {
     "Id": 0,
     "RouteName": "/api/users/login",
     "Method": "POST",
-    "Count": 5
+    "Count": 6
   },
   {
     "Id": 0,
@@ -87,13 +87,13 @@
     "Id": 0,
     "RouteName": "//index.html",
     "Method": "GET",
-    "Count": 20
+    "Count": 21
   },
   {
     "Id": 0,
     "RouteName": "//js/script.js",
     "Method": "GET",
-    "Count": 23
+    "Count": 24
   },
   {
     "Id": 0,
@@ -273,7 +273,7 @@
     "Id": 0,
     "RouteName": "/upload/background",
     "Method": "GET",
-    "Count": 9
+    "Count": 11
   },
   {
     "Id": 0,
@@ -321,6 +321,6 @@
     "Id": 0,
     "RouteName": "/uploads/01982197-32be-47b9-8649-18c671774d60.jpg",
     "Method": "GET",
-    "Count": 3
+    "Count": 4
   }
 ]
