@@ -15,7 +15,7 @@
     "Id": 0,
     "RouteName": "/api/users/register",
     "Method": "POST",
-    "Count": 9
+    "Count": 15
   },
   {
     "Id": 0,
@@ -87,13 +87,13 @@
     "Id": 0,
     "RouteName": "//index.html",
     "Method": "GET",
-    "Count": 21
+    "Count": 22
   },
   {
     "Id": 0,
     "RouteName": "//js/script.js",
     "Method": "GET",
-    "Count": 24
+    "Count": 25
   },
   {
     "Id": 0,
@@ -105,7 +105,7 @@
     "Id": 0,
     "RouteName": "/favicon.ico",
     "Method": "GET",
-    "Count": 4
+    "Count": 5
   },
   {
     "Id": 0,
@@ -273,7 +273,7 @@
     "Id": 0,
     "RouteName": "/upload/background",
     "Method": "GET",
-    "Count": 11
+    "Count": 15
   },
   {
     "Id": 0,
@@ -321,6 +321,12 @@
     "Id": 0,
     "RouteName": "/uploads/01982197-32be-47b9-8649-18c671774d60.jpg",
     "Method": "GET",
-    "Count": 4
+    "Count": 5
+  },
+  {
+    "Id": 0,
+    "RouteName": "/api/messages/2",
+    "Method": "GET",
+    "Count": 1
   }
 ]

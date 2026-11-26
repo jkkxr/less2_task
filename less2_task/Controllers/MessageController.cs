@@ -57,6 +57,7 @@ public class MessageController(MessageService messageService, IMapper mapper) : 
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetMessageById(int id)
     {
+        throw new Exception("Test exception");
         if (!CheckUser())
         {
             return Unauthorized();

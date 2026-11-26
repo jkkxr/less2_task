@@ -1,14 +1,21 @@
-﻿using less2_task.Models;
+﻿using less2_task.ErrorHandling;
+using less2_task.Models;
 
 using Microsoft.EntityFrameworkCore;
 
 namespace less2_task.Services;
 
-public class UserService(ApiDbContext dbContext)
+public class UserService(ApiDbContext dbContext, IConfiguration configuration)
 {
     public async Task<User> RegisterUserAsync(User newUser)
     {
-        if(await dbContext.Users
+        var registrationAllowed = configuration.GetValue<bool>("RegistrationAllowed");
+        if (!registrationAllowed)
+        {
+            throw new RegistrationDisabledException();
+        }
+
+        if (await dbContext.Users
             .AnyAsync(x => x.Email == newUser.Email))
         {
             throw new InvalidDataException("User already exists");

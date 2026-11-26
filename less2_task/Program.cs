@@ -1,4 +1,5 @@
 using FluentValidation;
+using less2_task.ErrorHandling;
 using less2_task.Middlewares;
 using less2_task.Models;
 using less2_task.Models.Validation;
@@ -7,6 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddProblemDetails();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -74,6 +78,7 @@ builder.Services.AddScoped<CategoryService>();
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+app.UseExceptionHandler();
 
 if (app.Environment.IsDevelopment())
 {

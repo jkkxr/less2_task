@@ -32,16 +32,16 @@ public class UserController(UserService userService, IMapper mapper): Controller
     {
         var newUser = mapper.Map<User>(request);
 
-        try
-        {
+        //try
+        //{
             var registeredUser = await userService.RegisterUserAsync(newUser);
             var authResponse = mapper.Map<AuthResponse>(registeredUser);
             return Ok(authResponse);
-        }
-        catch (Exception e)
-        {
-            return BadRequest(e.Message);
-        }
+        //}
+        //catch (Exception e)
+        //{
+        //    return BadRequest(e.Message);
+        //}
     }
 
     /// <summary>
